@@ -24,6 +24,14 @@ cnpm run build
 cnpm run build --report
 ```
 
+## Pit Encountered
+
+|Pit Encountered|Result|Solution|
+|----|----|----|
+|try to use Parcel instead of Webpack|failed|use Webpack instead|
+|try to add dependencies one by one instead of using Vue CLI|failed|use Vue CLI instead|
+|try to publish docs/ floder to freeCodeCodeCamp-XiAn.github.io|failed|change project name into home|
+
 ## LICENSE
 
 [MIT LICENSE](./LICENSE)
