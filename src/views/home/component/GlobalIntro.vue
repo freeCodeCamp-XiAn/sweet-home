@@ -54,6 +54,7 @@
 
     .whitesmoke {
         background-color: whitesmoke;
+        padding: 0 20px!important;
     }
 
     .cardWrap {
@@ -67,7 +68,7 @@
 
     .card {
         display: block;
-        margin-top: 20px;
+        margin: 20px 0;
         min-width: 210px;
         max-width: 100%;
         overflow: hidden;

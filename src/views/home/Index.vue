@@ -1,7 +1,15 @@
 <template>
     <div id="index">
-        <nav-header></nav-header>
-        <global-intro></global-intro>
+        <el-container>
+            <el-header class="indexHeader">
+                <nav-header></nav-header>
+            </el-header>
+            <!--<el-aside></el-aside>-->
+            <el-main>
+                <global-intro></global-intro>
+            </el-main>
+            <el-footer></el-footer>
+        </el-container>
     </div>
 </template>
 
@@ -34,8 +42,12 @@
 </script>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
+    .el-header, .el-main, .el-footer {
+        margin: 0!important;
+        padding: 0!important;
+    }
+
+    .indexHeader {
+        height: 50px!important;
     }
 </style>
