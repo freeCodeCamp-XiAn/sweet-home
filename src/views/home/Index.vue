@@ -9,7 +9,9 @@
                 <global-intro></global-intro>
                 <china-intro></china-intro>
             </el-main>
-            <el-footer></el-footer>
+            <el-footer>
+                <nav-footer></nav-footer>
+            </el-footer>
         </el-container>
     </div>
 </template>
