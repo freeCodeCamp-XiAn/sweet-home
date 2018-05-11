@@ -7,6 +7,7 @@
             <!--<el-aside></el-aside>-->
             <el-main>
                 <global-intro></global-intro>
+                <china-intro></china-intro>
             </el-main>
             <el-footer></el-footer>
         </el-container>
