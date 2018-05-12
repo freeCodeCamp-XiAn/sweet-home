@@ -1,0 +1,60 @@
+#game{
+    height:475px;
+    width:475px;
+    background-color:rgb(184,175,158);
+    border-radius: 15px;
+    /*-webkit-user-select:none;*/
+    position: relative;
+    font-family:"微软雅黑";
+    font-weight:bold;
+    text-align: center;
+}
+div{
+    -webkit-user-select:none;
+    height:100px;
+    width:100px;
+    line-height: 100px;
+    position:absolute;
+    background-color: rgb(204,192,178);
+    transition: all 0.3s;
+}
+.l0{background-color: rgb(238,228,218); color:rgb(124,115,106); font-size: 58px;}
+.l1{background-color: rgb(236,224,200); color:rgb(124,115,106); font-size: 58px;}
+.l2{background-color: rgb(242,177,121); color:rgb(255,247,235); font-size: 58px;}
+.l3{background-color: rgb(245,149,99); color:rgb(255,250,235); font-size: 50px;}
+.l4{background-color: rgb(244,123,94); color:rgb(255,247,235); font-size: 50px;}
+.l5{background-color: rgb(247,93,59); color:rgb(255,247,235); font-size: 50px;}
+.l6{background-color: rgb(236,205,112); color:rgb(255,247,235); font-size: 42px;}
+.l7{background-color: rgb(237,204,97); color:rgb(255,247,235); font-size: 42px;}
+.l8{background-color: rgb(236,200,80); color:rgb(255,247,235); font-size: 42px;}
+.l9{background-color: rgb(237,197,63); color:rgb(255,247,235); font-size: 34px;}
+.l10{background-color: rgb(238,194,46); color:rgb(255,247,235); font-size: 34px;}
+.l11{background-color: rgb(61,58,51); color:rgb(255,247,235); font-size: 34px;}
+div.gameOver{
+    display:none;
+    width:100%;
+    height:100%;
+    background-color: rgba(204,192,178,0.5);
+}
+div.gameOver .fruit{
+    width:300px;
+    height:220px;
+    text-align: center;
+    margin:0 auto;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgb(236,224,200);
+    z-index: 3;
+    font-size:30px;
+    line-height:50px;
+}
+div.gameOver h4{margin:0;}
+div.gameOver p{
+    margin:0;
+    font-size:18px;
+}
+div.gameOver button{
+    font-size:20px;
+}

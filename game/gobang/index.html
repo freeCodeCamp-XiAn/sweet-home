@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="x5-orientation" content="portrait">
+    <title>五子棋</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        .mask {
+            background-color: rgba(0, 0, 0, .6);
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .winer {
+            color: #E24B62;
+            font-weight: 500;
+            font-size: 20px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            height: 20px;
+            width: 9rem;
+            line-height: 20px;
+            transform: translateY(-50px);
+        }
+
+        .button {
+            position: absolute;
+            top: 50%;
+            width: 0;
+            left: 3.25rem;
+            transform: translateY(-50%);
+        }
+
+        .button button {
+            display: block;
+            width: 2.5rem;
+            height: 0.6rem;
+            white-space: nowrap;
+            border: 1px solid #333;
+            border-radius: 3px;
+            background-color: #ff9966;
+        }
+
+        .game {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 9rem;
+            height: 16rem;
+        }
+
+        .user_w {
+            height: 3.5rem;
+        }
+
+        .board {
+            height: 9rem;
+            background: url("./assets/board.jpg");
+            background-size: cover;
+        }
+
+        .user_b {
+            height: 3.5rem;
+        }
+
+        .chess {
+            height: 0.6rem;
+            width: 0.6rem;
+            float: left;
+            background-size: 0.52rem 0.52rem;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .chess.b {
+            background-image: url('./assets/b.png');
+        }
+
+        .chess.nb {
+            background-image: url('./assets/b.png');
+            border: 1px solid red;
+        }
+
+        .chess.w {
+            background-image: url('./assets/w.png');
+        }
+
+        .chess.nw {
+            background-image: url('./assets/w.png');
+            border: 1px solid red;
+        }
+    </style>
+    <script src="./lib/flexible/index.min.js"></script>
+</head>
+
+<body>
+    <div class="game">
+        <div class="user_w"></div>
+        <div class="board"></div>
+        <div class="user_b"></div>
+    </div>
+    <div class="mask">
+        <div class="winer">
+            <span class="winer_text"></span>
+        </div>
+        <div class="button">
+            <button class="start" onclick="game.startGame()">开始游戏</button>
+        </div>
+    </div>
+</body>
+<script>
+    class Game {
+        constructor() {
+            this.init()
+        }
+        /* 初始化 */
+        init() {
+            this.state = 1//游戏状态
+            this.isLine = false//是否连城一条线
+            this.step = []//记录棋步
+            /* 后面要用的元素 */
+            this.mask = document.querySelector('.mask')
+            this.button = document.querySelector('.button button')
+            this.winer = document.querySelector('.winer_text')
+            /* 生成所有的棋子，初始状态是none，记录行和列 */
+            let board = document.querySelector('.board')
+            this.allChess = []
+            for (let i = 1; i <= 15; i++) {
+                this.allChess[i] = []
+                for (let c = 1; c <= 15; c++) {
+                    let chess = document.createElement('div')
+                    chess.className = 'chess'
+                    chess.i = i//行
+                    chess.c = c//列
+                    chess.state = 'none'//棋子状态枚举：none：无子，white：白子，block黑子，nowWhite：刚下的白子，nowBlock:刚下的黑子
+                    chess.onclick = () => {//点击落子
+                        this.playChess(chess)
+                    }
+                    board.appendChild(chess)
+                    this.allChess[i][c] = chess
+                }
+            }
+        }
+        /* 状态管理，根据当前状态判断应该跳转到哪个状态 */
+        next() {
+            switch (this.state) {
+                case 1://游戏开始前
+                    this.state = 2
+                    break
+                case 2://黑子待下
+                    if (this.isLine) {
+                        this.state = 4
+                    } else {
+                        this.state = 3
+                    }
+                    break
+                case 3://白子待下
+                    if (this.isLine) {
+                        this.state = 4
+                    } else {
+                        this.state = 2
+                    }
+                    break
+                case 4://游戏结束
+                    this.state = 2
+                    break
+            }
+            this.render()
+        }
+        /* 根据状态渲染页面 */
+        render() {
+            (this.state == 2 || this.state == 3) && (this.mask.style.display = 'none')
+            this.state == 1 && (this.mask.style.display = 'block', this.button.innerHTML = '开始游戏')
+            this.state == 4 && (this.mask.style.display = 'block', this.button.innerHTML = '重新开始', this.winer.innerHTML = this.step[this.step.length - 1].state == 'nowWhite' ? '白色方胜' : '黑色方胜')
+            this.allChess.forEach(inline => {
+                inline.forEach(chess => {
+                    chess.state == 'none' && (chess.className = "chess")
+                    chess.state == 'nowWhite' && (chess.className = "chess nw")
+                    chess.state == 'nowBlack' && (chess.className = "chess nb")
+                    chess.state == 'white' && (chess.className = "chess w")
+                    chess.state == 'black' && (chess.className = "chess b")
+                })
+            })
+        }
+        /* 全屏 */
+        fullScreen() {
+            document.documentElement.webkitRequestFullscreen();
+        }
+        /* 取消全屏 */
+        cancelFullScreen() {
+            document.webkitFullscreenElement || document.webkitCancelFullScreen();
+        }
+        /* 判断是否连成5子,参数为当前落子 */
+        ComputeIsLine(chess) {
+            let minI = chess.i - 5 > 1 ? chess.i - 5 : 1
+            let maxI = chess.i + 5 < 15 ? chess.i + 5 : 15
+            let state = chess.state == 'nowWhite' ? 'white' : 'black'
+            let [line1, line2, line3, line4] = [0, 0, 0, 0]//共四个方向
+            for (let i = minI; i <= maxI; i++) {
+                if (i == chess.i) {
+                    for (let c = chess.c - 5; c <= chess.c + 5; c++) {
+                        if (c == chess.c) {
+                            line1++ , line2++ , line3++ , line4++
+                        } else {
+                            line4 = this.allChess[i][c] && (this.allChess[i][c].state == state) ? line4 + 1 : 0
+                        }
+                        if (line4 >= 5) {
+                            this.isLine = true
+                            return
+                        }
+                    }
+                } else {
+                    line1 = this.allChess[i][chess.c - (chess.i - i)] && (this.allChess[i][chess.c - (chess.i - i)].state == state) ? line1 + 1 : 0
+                    line2 = this.allChess[i][chess.c] && (this.allChess[i][chess.c].state) == state ? line2 + 1 : 0
+                    line3 = this.allChess[i][chess.c + (chess.i - i)] && (this.allChess[i][chess.c + (chess.i - i)].state) == state ? line3 + 1 : 0
+                }
+                if (line1 >= 5 || line2 >= 5 || line3 >= 5) {
+                    this.isLine = true
+                    return
+                }
+            }
+        }
+
+        /* 游戏开始 */
+        startGame() {
+            this.fullScreen()
+            this.step = []
+            this.isLine = false
+            this.allChess.forEach(inline => {
+                inline.forEach(chess => {
+                    chess.state = 'none'
+                })
+            })
+            this.next()
+        }
+        /* 记录落子 */
+        updateStep(chess) {
+            this.step.push(chess)
+        }
+        /* 落子,参数为当前点击的棋子,更改上一个棋子状态和当前棋子状态，记录棋步,计算是否连成一线 */
+        playChess(chess) {
+            if (chess.state == 'none') {
+                if (this.state == 1 || this.state == 3) {
+                    chess.state = 'nowWhite'
+                } else if (this.state == 2) {
+                    chess.state = 'nowBlack'
+                }
+                if (this.step.length >= 1) {
+                    this.step[this.step.length - 1].state = this.step[this.step.length - 1].state == 'nowWhite' ? 'white' : 'black'
+                }
+                this.updateStep(chess)
+                this.ComputeIsLine(chess)
+                this.next()
+            }
+        }
+    }
+    let game = new Game()
+</script>
+
+</html>

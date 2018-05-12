@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My 2048</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+	<link rel="stylesheet" href="css/2048.css">
+</head>
+<body>
+    <div id="game">
+        <div class="gameOver">
+            <div class="fruit">
+                <h4>游&nbsp;&nbsp;&nbsp;戏&nbsp;&nbsp;&nbsp;结&nbsp;&nbsp;&nbsp;束</h4>
+                <p class="time">游戏时间：30分钟</p>
+                <p class="sum">合并方块：30个</p>
+                <button>再接再厉</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/2048.js"></script>
+    <script>
+        var game2048 = new Game2048({xSize: 4,ySize: 4,});   
+    </script>  
+</body>
+</html>

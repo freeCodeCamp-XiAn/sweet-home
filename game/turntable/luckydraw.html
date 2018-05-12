@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Wheel of Names</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-7">
+          <canvas id="myCanvas" style="width:100%;height:auto" width="800" height="800" onClick="spin()"></canvas>
+        </div>
+        <div class="col-md-3">
+          <br/><br/>
+          <textarea id="names" placeholder="Paste in contestants' names here, one name per line" class="form-control" style="vertical-align:top;width:300px;height:600px"></textarea>
+          <br/><br/>
+          <button class="btn btn-default" onclick="addNames()">Add names to wheel</button>
+          <button class="btn btn-default" onclick="spin()">Spin!</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="winnerModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title" id="winnerModalLabel">We have a winner!</h4>
+          </div>
+          <div class="modal-body">
+            <p class="h1" id="winner_name"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="removeWinner();drawWheel(myWheel, canvas);">Remove winner</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addedRandomNamesModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">Note</h4>
+          </div>
+          <div class="modal-body">
+            50 randomly picked names were added to the wheel, instead of all names.
+            The number is kept at 50 to make the names easy to read.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      function ImageCache () {
+        this.images = new Object();
+
+        this.addImage = function(imageName) {
+          this.images[imageName] = new Image();
+          this.images[imageName].src = imageName;
+        };
+
+        this.getImage = function(imageName) {
+          if (imageName in this.images) {
+            return this.images[imageName];
+          }
+          else {
+            throw 'Image ' + imageName + ' not found in ImageCache!';
+          }
+        };
+      }
+
+      function Wheel () {
+        this.names = ['', '', '', '', '', '', '', ''],
+        this.angle = 0;
+        this.speed = 0;
+
+        this.clearNames = function() {
+          this.names = [];
+        }
+
+        this.addName = function(name) {
+          this.names.push(name);
+        }
+
+        this.startSpin = function() {
+          this.speed = .5 + Math.random() / 10.0;
+        }
+
+        this.tick = function() {
+          this.angle += this.speed;
+          if (this.angle > Math.PI * 2) {
+            this.angle -= Math.PI * 2;
+          }
+          this.speed = this.speed * .99;
+          if (this.speed < 0.002) {
+            this.speed = 0;
+          }
+        }
+
+        this.getResult = function() {
+          var radiansPerSegment = 2 * Math.PI / this.names.length;
+          var index = this.angle / radiansPerSegment;
+          index = Math.round(index);
+          if (index >= this.names.length) {
+            index = 0;
+          }
+          var result = this.names[index];
+          return result;
+        }
+
+        this.removeName = function(name) {
+          this.names.splice(this.names.indexOf(name), 1);
+        }
+      }
+
+      var imageCache;
+      var myWheel = new Wheel();
+      var canvas = document.getElementById('myCanvas');
+      drawWheel(myWheel, canvas);
+
+      function spin() {
+        myWheel.startSpin();
+        animateWheel(myWheel, canvas);
+      }
+
+      function getLinesAsArray(str) {
+        var retval = [];
+        var lines = str.replace(/\r\n/g, "\n").split("\n");
+        for (var i = 0; i < lines.length; i++) {
+          var thisLine = lines[i];
+          if (thisLine.length > 0 && retval.indexOf(thisLine) == -1) {
+            retval.push(thisLine);
+          }
+        }
+        return retval;
+      }
+
+      function getRandomElementFromArray(array) {
+        return array[Math.floor(Math.random() * array.length)];
+      }
+
+      function addNames() {
+        var names = getLinesAsArray(document.getElementById('names').value);
+        // Add a maximum of 50 random names to the wheel.
+        myWheel.clearNames();
+        var namesAdded = 0;
+        for (var i = 0; i < 100; i++) {
+          if (names.length == 0) {
+            break;
+          }
+          else {
+            var name = getRandomElementFromArray(names);
+            myWheel.addName(name);
+            namesAdded += 1;
+            // Remove the picked name.
+            names.splice(names.indexOf(name), 1);
+          }
+        }
+        drawWheel(myWheel, canvas);
+        if (namesAdded == 100) {
+          $('#addedRandomNamesModal').modal();
+        }
+      }
+
+      function removeWinner() {
+        var winnerName = myWheel.getResult()
+        // Remove winner from the wheel.
+        myWheel.removeName(winnerName);
+        // Remove winner from text area.
+        var namesField = document.getElementById('names');
+        var names = getLinesAsArray(namesField.value);
+        names.splice(names.indexOf(winnerName), 1);
+        namesField.value = names.join('\n');
+      }
+
+      window.requestAnimFrame = (function(callback) {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+        function(callback) {
+          window.setTimeout(callback, 1000 / 60);
+        };
+      })();
+
+      function drawWheel(myWheel, canvas) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        if (!imageCache) {
+          imageCache = new ImageCache();
+          imageCache.addImage('200.png');
+        }
+        context.save();
+        context.translate(context.canvas.width / 2, context.canvas.height / 2);
+        context.rotate(myWheel.angle);
+        var radiansPerSegment = 2 * Math.PI / myWheel.names.length;
+        var colors = ['#3369E8', '#D50F25', '#EEB211', '#009925'];
+        var wheelRadius = context.canvas.width * .45;
+        for (var i = 0; i < myWheel.names.length; i++) {
+          context.beginPath();
+          context.moveTo(0, 0);
+          context.arc(0, 0, wheelRadius, -radiansPerSegment/2, radiansPerSegment/2);
+          context.lineTo(0, 0);
+          context.fillStyle = colors[i % colors.length];
+          context.fill();
+          context.lineWidth = 1;
+          context.strokeStyle = '#333333';
+          context.stroke();
+          context.fillStyle = 'black';
+          context.font = '16pt Helvetica';
+          context.textBaseline = 'middle';
+          context.textAlign = 'end';
+          context.fillText(myWheel.names[i], wheelRadius - 10, 0);
+          context.rotate(-radiansPerSegment);
+        }
+        context.restore();
+
+        // Draw center circle, to reduce weird line effects.
+        context.save();
+        context.translate(context.canvas.width / 2, context.canvas.height / 2);
+        context.fillStyle = 'white';
+        context.beginPath();
+        context.arc(0, 0, wheelRadius/5, 0, Math.PI * 2);
+        context.fill();
+        context.lineWidth = 2;
+        context.strokeStyle = '#333333';
+        context.stroke();
+        context.restore();
+
+        // Draw Google logo in the center.
+        context.save();
+        context.translate(context.canvas.width / 2, context.canvas.height / 2);
+        context.rotate(myWheel.angle);
+        var image = imageCache.getImage('200.png');
+        context.drawImage(image, -image.width/2, -image.height/2);
+        context.restore();
+
+        // Draw pointer.
+        context.save();
+        context.translate(context.canvas.width / 2, context.canvas.height / 2);
+        context.beginPath();
+        context.moveTo(wheelRadius - 10, 0);
+        context.lineTo(wheelRadius + 30, -20);
+        context.lineTo(wheelRadius + 30, 20);
+        context.lineTo(wheelRadius - 10, 0);
+        context.fillStyle = 'lightgray';
+        context.fill();
+        context.lineWidth = 2;
+        context.strokeStyle = '#333333';
+        context.stroke();
+        context.restore();
+      }
+
+      function animateWheel(myWheel, canvas) {
+        myWheel.tick();
+        drawWheel(myWheel, canvas);
+        if (myWheel.speed > 0) {
+          requestAnimFrame(function() {
+            animateWheel(myWheel, canvas);
+          });
+        }
+        else {
+          setTimeout(function() {
+            document.getElementById('winner_name').innerHTML = myWheel.getResult();
+            $('#winnerModal').modal();
+          }, 1000);
+        }
+      }
+
+    </script>
+  </body>
+</html>
