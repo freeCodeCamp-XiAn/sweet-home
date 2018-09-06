@@ -1,0 +1,35 @@
+/*--------------------轮播--------------*/
+@media screen and (max-width: 750px){
+    .carousel{
+        width: 100%;
+    }
+    .num1{
+        left: 41%;
+    }
+    .num2{
+        left: 48%;
+    }
+    .num3{
+        left: 55%;
+    }
+}
+/*-------------------活动---------------*/
+@media screen and (max-width:1052px){
+    .xianBottom-left {
+        border: none;
+    }
+}
+@media screen and (max-width:750px){
+    .xianBottom-left{
+        width: 100%;
+
+        padding: 0;
+        margin: 0;
+    }
+    .xianBottom-right {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+}

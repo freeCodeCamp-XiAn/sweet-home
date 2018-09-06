@@ -1,0 +1,43 @@
+ul {
+    display: block;
+    padding: 0;
+}
+
+li {
+    font-size: 13px;
+    border: solid 1px cadetblue;
+    line-height: 30px;
+    list-style: none;
+    padding-left: 15px;
+    width: 80%;
+    opacity:0.8;
+    margin: 0 auto;
+}
+
+.Doing {
+    background-color: cornflowerblue;
+    opacity:0.7;
+    line-height: 25px;
+    padding-left: 15px;
+    width:80%;
+    margin: 0 auto;
+    border-radius:5px;
+}
+.Finish {
+    background-color: darkseagreen;
+    opacity:0.7;
+    line-height: 25px;
+    padding-left: 15px;
+    width:80%;
+    margin: 0 auto;
+    border-radius:5px;
+}
+
+.head {
+    width:80%;
+    margin: 0 auto;
+}
+
+h2 {
+    font-weight: 400;
+}

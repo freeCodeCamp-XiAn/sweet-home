@@ -1,0 +1,503 @@
+
+body{
+    padding: 0;
+    margin: 0;
+}
+h3{
+    font-size: 35px;
+    font-style: unset;
+    font-weight: 400;
+    text-align: center;
+    margin-top:0;
+}
+.little1{
+    width: 150px;
+    height: 2px;
+    border: none;
+    background-color: #4caf50;
+}
+P{
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/*----------------------------导航栏-----------------------------------*/
+
+#top-container {
+    /*渐变背景*/
+    font-size: 12px;
+}
+#top {
+    position: relative;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*background: white;*/
+    background: linear-gradient(to left bottom, hsl(154, 100%, 85%) 0%,hsl(43, 100%, 85%) 100%);
+    width: 100%;
+    z-index: 900;
+}
+#headImg {
+    height: 50px;
+}
+a {
+    color: #b0b0b0;
+    text-decoration: none;
+}
+
+#top a:hover {
+    color: #FFF;
+    font-weight:bold;
+}
+
+#top .line {
+    margin: 1em;
+    color: #424242;
+    font-size: 10px;
+}
+#mobile_nav {
+    display: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 750px) {
+    #top {
+        background: white;
+    }
+    .nav{
+        display: none;
+    }
+    #headImg {
+        height: 30px;
+    }
+    #mobile_nav {
+        display: block;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+/*手机端的导航栏*/
+aside{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+    z-index: 999;
+    background: white;
+}
+
+aside a{
+    margin: 20px;
+    padding: 30px;
+}
+
+#close_img {
+    position: fixed;
+    right: 5px;
+    top: 5px;
+}
+
+#close_img:hover{
+    cursor: pointer;
+}
+
+/*----------------------------轮播图-----------------------------------*/
+/*----------------------------轮播图-----------------------------------*/
+
+.carousel-background{
+    background-color:  #fff;
+}
+.carousel{
+    width:100%;/*750px以下宽100%响应式已经写好 这里考虑70%*/
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.carousel-main{
+    position: relative;
+}
+.photos{
+    width: 300%;
+    position: absolute;
+    left:0;
+    animation: ma 20s ease-out infinite alternate;
+}
+.photos li{
+    width: 33.33%;
+    float: left;
+}
+.photos li img{
+    width: 100%;
+    height:500px;
+}
+.photos li div{
+    position: absolute;
+    top:200px;
+}
+@keyframes ma {
+    0% {
+        left: 0%;
+    }
+    33% {
+        left: -100%;
+    }
+    66% {
+        left: -200%;
+    }
+    100% {
+        left: 0%;
+    }
+}
+.num{
+    position: absolute;
+    z-index: 10;
+    top:450px;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border: 1px solid #eeeded;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.num1{
+    left: 44%;
+}
+.num2{
+    left: 48%;
+}
+.num3{
+    left: 52%;
+}
+
+.num:hover{background-color: #4caf50;cursor:pointer;}
+#a1:hover ~ #photos{animation: ma1 1s ease-out forwards;}
+#a2:hover ~ #photos{animation: ma2 .5s ease-out forwards;}
+#a3:hover ~ #photos{animation: ma3 .5s ease-out forwards;}
+@keyframes ma1 {0%{margin-left:0%;} }
+@keyframes ma2 {100%{margin-left:-100%} }
+@keyframes ma3 {100%{margin-left:-200%;}}
+/*----------------------------开启FCC----------------------------------*/
+
+/*-----------------------------感谢支持--------------------------------*/
+#Thanks{
+    height: 150px;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+/*----------------------------什么是Fcc-----------------------------*/
+#IND{
+    width:100%;
+    background-color: whitesmoke;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+#indImg{
+    width: 80%;
+    margin:50px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+#indImg p{
+    margin: 30px 50px;
+}
+.ind{
+    width: 350px;
+    height: 330px;
+    border-bottom: 4px solid #4caf50;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ind img{
+    width: 100px;
+    margin: 0 auto;
+}
+/*-----------------------About---------------------------*/
+#FCCinChina{
+    width: 100%;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#titleChina{
+    font-size: 30px;
+}
+.little2{
+    width: 90px;
+    height: 2px;
+    border: none;
+    background-color: #4caf50;
+}
+#leftPart{
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+#leftPart p{
+    width: 70%;
+    margin: 30px auto;
+}
+#leftPart ul{
+    font-weight: 300;
+    margin: 20px auto;
+}
+#rightPart{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#rightPart img{
+    height: 320px;
+}
+/*-----------------------------学习内容-------------------------*/
+#learning{
+    padding-top: 50px;
+    background-color: whitesmoke;
+    border-bottom: 1px solid gainsboro;
+}
+#learnIcon{
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.FCC_icon{
+    width: 230px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.FCC_icon img{
+    width: 80px;
+    margin-left: 75px;
+}
+/*-----------------------------西安FCC--------------------------*/
+#xianTop{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.little2{
+    width: 80%;
+}
+#xianTop p{
+    width: 80%;
+    margin: 20px auto;
+}
+#xianMid{
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    opacity: 0.6;
+}
+#xianBottom{
+    width: 80%;
+    margin: 0 auto;
+}
+/*-----------------内容展示----------------------*/
+.xianBottom{
+    width: 75%;
+    margin: 1rem auto;
+    font-size: 2rem;
+    letter-spacing: .05rem;
+    text-align: center;
+}
+.xianBottom-event{
+    position: relative;
+}
+.xianBottom-event img{
+    position: absolute;
+    top:0;
+    transform: scale(.7,.7);
+    cursor: pointer;
+
+}
+#openNar{
+    left: 80%;
+    display: none;
+}
+#closeNar{
+    left: 80%;
+
+}
+.xianBottom li{
+    width: 100%;
+    vertical-align: middle;
+    margin: 2rem auto;
+}
+.xianBottom-left{
+    width:350px;
+    border-right: 2px solid aliceblue;
+    color: darkseagreen;
+    display: inline-block;
+}
+
+.xianBottom-left img{
+    width: 90%;
+    padding: 0 5%;
+}
+.xianBottom-right{
+    width: 350px;
+    display: inline-block;
+    color: grey;
+    padding-left: 5%;
+    vertical-align: top;
+
+}
+.xianBottom-right p {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    margin-bottom: .5rem;
+}
+.xianBottom-right-title {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #686868;
+}
+.xianBottom-right-title span{
+
+    padding-bottom:.3rem;
+    border-bottom: 2px solid #0087d4;
+    display: inline-block;
+}
+.xianBottom-right-date {
+    text-align: left;
+
+    color:#767676;
+}
+.xianBottom-right-text {
+    text-align: left;
+    color: #7b7b7b;
+
+}
+/*讲师部分*/
+#card2 {
+    text-align: center;
+}
+
+#card2 .peopleContainer {
+    width: 100%;
+    margin: 43px auto 0;
+    text-align: center;
+    overflow: hidden;
+}
+.container1  {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+}
+.people-item {
+    /*border: solid  gray 1px;*/
+    width: 30%;
+    height:100%;
+}
+.peopleContainer .people-item .people-photo {
+    line-height: 55px;
+    padding-top: 30px;
+    padding: 0px 30px 0px 60px;
+    margin: 23px;
+}
+#card2 .peopleContainer img{
+    width: 100px;
+    border: solid 1px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+@media screen and (max-width: 685px) {
+
+    .contentSpine{
+        background: url() ;
+    }
+    .contentRightDot,.contentLeftDot{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .contentRightDot,.contentLeftDot,.contentBotttom .rightIcon {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 525px) {
+
+    .contentRightDot,.contentLeftDot,.contentBotttom .rightIcon,.time{
+        display: none;
+    }
+
+}
+
+
+/*-------------------------JoinUS----------------------------------*/
+#JoinUs{
+    background-color: whitesmoke;
+    padding-top: 70px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+}
+#zuzhi{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#zuzhi a{
+    text-decoration: none;
+    color: #4caf50;
+}
+#zuzhi p{
+    color: #4caf50;
+}
+/*------------------------------footer-------------------------------*/
+#CopyRight{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-weight: 300;
+}
+#CopyRight a{
+    text-decoration: #4caf50;
+    color: #4caf50;
+}

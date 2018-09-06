@@ -81,12 +81,15 @@
     }
 
     .photo {
+        width: 100%;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         img {
-            position: relative;
-            height: 280px;
-            top: calc(50% - 140px);
-            right: 10%;
+            flex: 1;
+            display: inline-block;
+            width: 100%;
         }
     }
 </style>

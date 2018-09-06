@@ -1,0 +1,234 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 810px){
+    #whole{
+        width: 80%;
+        height: 100%;
+        margin-left: 10%;
+        padding: 0;
+        font-weight: 400;
+        font-size: 12px;
+    }
+    h3{
+        height: 60px;
+        margin-top: 30px;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    p{
+        text-indent:2em;
+        line-height: 18px;
+    }
+
+    #Logo img{
+        margin-top: 10%;
+        width: 100%;
+        height: 20%;
+
+    }
+}
+
+@media screen and (min-width: 810px){
+    #whole{
+        width: 65%;
+        height: 100%;
+        margin-left: 15%;
+        padding: 0;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    h3{
+        height: 90px;
+        margin-top: 80px;
+        font-size: 23px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    p{
+        text-indent:2em;
+        line-height: 23px;
+    }
+}
+
+
+
+/*-------------------------------------------------------------导航栏的样式-------------------------------------------------------------------------------*/
+@media screen and (max-width: 810px){
+    #xa-navbar{
+        height: 100%;
+        width: 80px;
+        float: right;
+        font-size: 14px;
+        background-color: #4caf50;
+        margin-right: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+
+    #openNar{
+        width: 10px;
+        position: fixed;
+        top: 31%;
+        right: 35px;
+    }
+
+    #closeNar{
+        position: fixed;
+        top: 38%;
+        right: 61px;
+    }
+
+    #closeNar img{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 810px){
+    #xa-navbar{
+        height: 100%;
+        width: 80px;
+        float: right;
+        font-size: 14px;
+        background-color: #4caf50;
+        margin-right: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+
+    #closeNar{
+        display: none;
+    }
+
+    #openNar{
+        display: none;
+    }
+}
+
+#xa-navbar ul{
+    list-style:none;
+    text-align: center;
+}
+
+#xa-navbar li a{
+    text-decoration: none;
+    line-height: 50px;
+    color: aliceblue;
+}
+
+#xa-navbar li a:hover{
+    color: coral;
+}
+
+/*-------------------------------------------------------------你将学到什么-------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 810px){
+    .FCC_icon{
+        width:33%;
+        height: 30%;
+        float: left;
+    }
+    .FCC_icon img{
+        width: 45px;
+        height: 45px;
+        margin-left:  40%;
+        margin-top: 25%;
+    }
+}
+
+@media screen and (min-width: 810px){
+    .FCC_icon{
+        width: 20%;
+        float: left;
+    }
+
+    .FCC_icon img{
+        width: 75px;
+        height: 75px;
+        margin-left: 30%;
+        margin-top: 30%;
+    }
+}
+
+
+/*----------------------------------------------------------------底部样式--------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 810px){
+    #CopyRight{
+        text-align: center;
+        font-size: 11px;
+        height: 30px;
+        margin-top: 50px;
+    }
+}
+
+@media screen and (min-width: 810px){
+    #CopyRight{
+        text-align: center;
+        font-size: 13px;
+        height: 30px;
+        margin-top: 50px;
+    }
+}
+
+#CopyRight span a{
+    text-decoration: none;
+    color: #4caf50;
+}
+
+/*----------------------------------------------------------------相关组织-------------------------------------------------------------------------------*/
+@media screen and (max-width: 810px){
+    #zuzhi img{
+        display: flex;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        margin-top: 30px;
+    }
+
+    .box{
+        display: flex;
+        justify-content: center;
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 810px){
+    #zuzhi img{
+        display: flex;
+        justify-content:center;
+        width: 100px;
+        height: 100px;
+        margin-top: 25px;
+    }
+
+    .box{
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        margin-bottom: 25px;
+        width: 25%;
+        height: 25%;
+    }
+}
+
+#zuzhi{
+    display: flex;
+    color: #4caf50;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+#zuzhi a{
+    text-decoration: none;
+    color: #4caf50;
+}
