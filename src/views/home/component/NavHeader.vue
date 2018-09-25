@@ -15,7 +15,7 @@
 
 <script>
     export default {
-        name: "NavHeader.vue",
+        name: "NavHeader",
         data() {
             return {
                 activeIndex: '1'
