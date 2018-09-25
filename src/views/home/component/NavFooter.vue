@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "NavFooter.vue"
+        name: "NavFooter"
     }
 </script>
 
